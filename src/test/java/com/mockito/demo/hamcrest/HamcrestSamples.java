@@ -56,4 +56,10 @@ public class HamcrestSamples {
 		String text = "test";
 		MatcherAssert.assertThat(text, CoreMatchers.not(Matchers.emptyOrNullString()));
 	}
+	
+	@Test
+	public void IntegerNotNullAssertThat_test() {	
+		Integer number = 123;
+		MatcherAssert.assertThat(number, CoreMatchers.not(Matchers.nullValue()));
+	}
 }

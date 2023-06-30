@@ -12,7 +12,7 @@ import org.mockito.Mockito;
 import com.mockito.demo.repository.TodoRepository;
 import com.mockito.demo.service.TodoBusinessService;
 
-public class WhenThenTest {
+public class WhenThenTestStubbing {
 	@Test
 	@DisplayName("todo service mock test")
 	public void retrieveTodosRelated_TodoRepositoryImpl_mock_test() {

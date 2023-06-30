@@ -1,67 +1,35 @@
+
 package com.mockito.demo.mock.annotations;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
-import static org.mockito.BDDMockito.given;
-import static org.mockito.BDDMockito.then;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
+
+import com.mockito.demo.model.Employee;
+import com.mockito.demo.repository.EmployeeRepository;
+import com.mockito.demo.service.EmployeeService;
 
 @ExtendWith(MockitoExtension.class)
 public class InjectMocksAnnotationTest {
-
-	@Mock
-	private Player player;
 	
 	@InjectMocks
-	private Game game;
+	private EmployeeService employeeService;
+	
+	@Mock
+	private EmployeeRepository employeeRepository;
 	
 	@Test
 	public void testWithWhenAndReturn() {
-		when(player.getWeapon()).thenReturn("sword");
+		when(employeeRepository.save(Mockito.any(Employee.class))).thenReturn(true);
 		
-		assertEquals("Player attack with: sword", game.attack());
-	}
-	
-	@Test
-	public void testWithGivenAndVerify() {
-		given(player.getWeapon()).willReturn("sword");
+		Employee employee = new Employee(1L, "test", "test");
+		employeeService.createNewEmployee(employee);
 		
-		assertEquals("Player attack with: sword", game.attack());
-		
-		//verify that getWeapon has been called inside attack
-		verify(player, times(1)).getWeapon();
+		Mockito.verify(employeeRepository, Mockito.times(0)).save(Mockito.any(Employee.class));
 	}
 }
-
-
-class Game {
-    private Player player;
-
-    public Game(Player player) {
-        this.player = player;
-    }
-
-    public String attack() {
-        return "Player attack with: " + player.getWeapon();
-    }
-}
-
-class Player {
-    private String weapon;
-
-    public Player(String weapon) {
-        this.weapon = weapon;
-    }
-
-    String getWeapon() {
-        return weapon;
-    }
-}
-
