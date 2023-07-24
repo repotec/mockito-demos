@@ -22,4 +22,8 @@ public class EmployeeService {
 	public List<ValidationMap> updateEmployee(Employee employee) {		
 		return employeeRepository.validateEmployee(employee);
 	}
+
+	public void update (Employee employee) {
+		//nothing
+	}
 }

@@ -7,6 +7,10 @@ import com.mockito.demo.model.Employee;
 import com.mockito.demo.service.ValidationMap;
 
 public class EmployeeRepository {
+
+	public void update(Employee employee){
+
+	}
 	public boolean save(Employee employee) {
 		if(employee == null) {
 			return false;
